@@ -35,8 +35,8 @@ repositories {
 apply plugin: "java"
 apply plugin: "com.adarshr.test-logger"
 
-group = "com.github.briandilley.jsonrpc4j"
-version = "1.6.0.bisq.1-SNAPSHOT"
+group = "com.github.bisq-network"
+version = "1.6.0.bisq.1"
 description = """
 This project aims to provide the facility to easily implement JSON-RPC for the java programming language.
 """
