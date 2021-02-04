@@ -150,14 +150,14 @@ public class JsonRpcHttpClient extends JsonRpcClient implements IJsonRpcClient {
 					throw new HttpException("Caught error with no response body.", e);
 				}
 
-				byte[] errorText = e.getMessage().getBytes(UTF_8);
+				byte[] errorText = null;
 				try (InputStream answer = getStream(connection.getErrorStream(), useGzip)) {
 					errorText = readErrorStream(answer, 1024);
 					PushbackInputStream wrappedStream = new PushbackInputStream(answer, errorText.length);
 					wrappedStream.unread(errorText);
 					return super.readResponse(returnType, wrappedStream);
 				} catch (IOException ef) {
-					throw new HttpException(new String(errorText, UTF_8), ef);
+					throw new HttpException(errorText != null ? new String(errorText, UTF_8) : e.getMessage(), ef);
 				}
 			}
 		} finally {
