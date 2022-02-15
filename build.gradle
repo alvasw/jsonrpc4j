@@ -143,3 +143,9 @@ artifacts {
 }
 
 apply from: 'publishing.gradle'
+
+tasks.named('jar') {
+    manifest {
+        attributes('Automatic-Module-Name': '$group')
+    }
+}
